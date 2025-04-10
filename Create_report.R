@@ -3,8 +3,19 @@ library(tidyverse)
 library(openxlsx)
 library(readxl)
 
+# Import functions
+source("src/functions.r")
+
+# Folders - import & output locations (should really be in a .env file to avoid sharing file paths)
+import_location <- "Inputs/"
+output_location <- "Outputs/"
+
+# Get current month name
+current_month <- get_month()
+current_month_filename <- paste0(current_month,"_dummy_data")
+
 # Import data
-data_frame <- read_excel("Inputs/dummy_data.xlsx")
+data_frame <- import_csv(import_location, current_month_filename)
 
 # Summary - National
 # Grouping by date and creating a sum of metric
@@ -51,4 +62,5 @@ addStyle(wb, "National and Regional", title_font, rows = 2, cols = 2)
 addStyle(wb, "National and Regional", blue_font, rows = c(3,4,7,9:15), cols = c(2:4), gridExpand = TRUE, stack = TRUE)
 
 # Save final excel output
-saveWorkbook(wb,"Outputs/final_output.xlsx",overwrite = TRUE)
+output_file_name <- paste0(output_location, current_month,"_final_output.xlsx")
+saveWorkbook(wb,output_file_name,overwrite = TRUE)
