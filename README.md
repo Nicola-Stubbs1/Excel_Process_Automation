@@ -1,5 +1,5 @@
-Excel Process Automation
-❗ Note: this repository only contains dummy data and has no reflection on real life NHS providers performance.
+## Excel Process Automation
+❗Note: this repository only contains dummy data and has no reflection on real life NHS providers performance.
 
 This repo is designed to create a sample excel file using the openxlsx package.
 
