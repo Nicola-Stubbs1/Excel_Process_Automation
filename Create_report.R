@@ -73,13 +73,3 @@ addStyle(wb, "National and Regional", blue_font, rows = c(3,4,7,9:15), cols = c(
 output_file_name <- paste0(output_location, current_month,"_final_output.xlsx")
 saveWorkbook(wb,output_file_name,overwrite = TRUE)
 
-
-#### Using a pre-loaded excel template  #####
-
-wb<-loadWorkbook("Template.xlsx") # Template uses formulas, conditional formatting and data bars
-# Writes whole data set into All data sheet
-writeData(wb, "All Data", data_frame, startCol = 1, startRow = 1, colNames = TRUE)
-
-# creates a file name and saves to Outputs folder
-output_file_name <- paste0(output_location, current_month,"_final_output_Template.xlsx")
-saveWorkbook(wb,output_file_name,overwrite = TRUE)
