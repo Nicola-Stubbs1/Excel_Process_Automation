@@ -77,3 +77,37 @@ import_xlsx <- function(import_location, text, sheet = NULL) {
   
 }
 
+# Function for SQL Database connection
+getdb_connection <- function(server) {
+  # SQL Server connection set up  - port automatically set
+  
+  DBI::dbConnect(odbc::odbc(),
+                 
+                 Driver = "ODBC Driver 17 for SQL Server", # generic setting
+                 
+                 Server = server, # uses specified value for the server
+                 
+                 Database = "Warehouse",
+                 
+                 Trusted_Connection = "Yes", # Both settings remove need to sign in and trusts connection
+                 
+                 TrustServerCertificate = "yes")
+  
+}
+
+get_current_previous_dates <- function (date){
+# formats date in ymd format - makes it easier to work with
+  formatted_date <- lubridate::ymd(date)
+  #Gets month (current)
+  currentMonth <- month(formatted_date,label = TRUE,abbr = FALSE)
+  #Gets year (current)
+  currentyear <- year(formatted_date)
+  #gets previous month
+  previousMonth <- month(formatted_date - month(1),label = TRUE,abbr = FALSE)
+  # gets year for previous month
+  previousyear <- year(formatted_date - month(1))
+  return (list (current_month = currentMonth,
+                current_year = currentyear,
+                previous_month = previousMonth,
+                previous_month_year = previousyear))
+}
